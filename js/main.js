@@ -8,7 +8,7 @@ var CHUTE_2_COLOR = [15, 15, 200, 50];
 
 var FIRST_AID_TIME = 10.0; 
 
-var CAR_POS = [[119, 234], [174, 190], [164, 168], [261 , 201], [296, 207], [323, 206], [334, 219], [463, 185], [386, 168], [426, 426], [443, 435], [445, 450], [517, 227], [439, 339], [257, 288]];
+var CAR_POS = [];//[[119, 234], [174, 190], [164, 168], [261 , 201], [296, 207], [323, 206], [334, 219], [463, 185], [386, 168], [426, 426], [443, 435], [445, 450], [517, 227], [439, 339], [257, 288]];
 var CIRCLE_DEFS = [
     //{idx: 0, downtime: 1, uptime: 1, dps: 5},
     {idx: 1, downtime: 412, uptime: 300, dps: .5},
@@ -767,117 +767,117 @@ var circles = [];
 
 function StartCircles()
 {
-    circles = []
-    if(pathDone)
-    {
-        var circlecont = document.getElementById('circlecontainer');
-        var addTime = 0; 
+    // circles = []
+    // if(pathDone)
+    // {
+    //     var circlecont = document.getElementById('circlecontainer');
+    //     var addTime = 0; 
 
-        //deep copy
-        circles = JSON.parse(JSON.stringify(CIRCLE_DEFS));
+    //     //deep copy
+    //     circles = JSON.parse(JSON.stringify(CIRCLE_DEFS));
 
-        for(n=0;n<circles.length;n++)
-        {
-            var circle = circles[n];
-            circle.downtime = circle.downtime * SECONDS; 
-            circle.uptime = circle.uptime * SECONDS;
-            addTime += circle.downtime;
-            circle.add_downtime = addTime;
-            addTime += circle.uptime; 
-            circle.add_uptime = addTime;
-        }
+    //     for(n=0;n<circles.length;n++)
+    //     {
+    //         var circle = circles[n];
+    //         circle.downtime = circle.downtime * SECONDS; 
+    //         circle.uptime = circle.uptime * SECONDS;
+    //         addTime += circle.downtime;
+    //         circle.add_downtime = addTime;
+    //         addTime += circle.uptime; 
+    //         circle.add_uptime = addTime;
+    //     }
 
-        lastUpdateCircles = Date.now();
+    //     lastUpdateCircles = Date.now();
 
-        DisplayCircles();
+    //     DisplayCircles();
 
-        setTimeout(function(){RunCircles();},1000);
-    }
+    //     setTimeout(function(){RunCircles();},1000);
+    // }
 }
 
 function DisplayCircles()
 {
-    var circlecont = document.getElementById('circlecontainer');
-    circlecont.innerHTML = "";
-    var count = 4
-    if(circles.length < count)
-    {
-        count = circles.length;
-    }
+    // var circlecont = document.getElementById('circlecontainer');
+    // circlecont.innerHTML = "";
+    // var count = 4
+    // if(circles.length < count)
+    // {
+    //     count = circles.length;
+    // }
 
-    for(i=0; i< count; i++)
-    {
-        var str = ""
-        var circleclass = i == 0 ? "activecircle" : "circle";
-        var dps = circles[i].dps.toString().replace(/^0+/, ''); 
-        //var closing = circles[i].downtime > 0 ? "WAITING " : "CLOSING! "; 
-        var phrases = ["SAFE: ", "CLOSE: "];
-        // var timestr = "";
-        // var time = circles[i].downtime > 0 ? circles[i].downtime : circles[i].uptime;
-        //var times = [circles[i].downtime, circles[i].uptime]
-        var times = [circles[i].add_downtime - circles[i].downtime, circles[i].add_uptime];
-        var displayTimes = [];
-        for(n=0;n<times.length;n++)
-        {
-            var timestr = "";
-            var time = times[n]
-            var displayTime = Math.floor(time / SECONDS);
-            var s = displayTime % 60; 
-            var m = (displayTime - s) / 60;
-            timestr = timestr + m.toString() + ":";
-            if(s < 10)
-            {
-                timestr = timestr + "0";
-            }
-            timestr = timestr + s.toString();
-            displayTimes.push(timestr);
-        }
-        str = str + "<div class="+circleclass+"><div class='dps'>"+dps+"</div><div class='dpsfooter'>DPS</div><div class='closetime'>";
-        str = str + "CIRCLE " + circles[i].idx + "<br>";
-        str = str + displayTimes[0]
-        // for(n=0; n<displayTimes.length; n++)
-        // {
-        //     str = str + phrases[n] + displayTimes[n]
-        //     if(n != displayTimes.length - 1)
-        //     {
-        //         str = str + "<br>";
-        //     }
-        // }
-        str = str +"</div>";
-        circlecont.innerHTML = circlecont.innerHTML + str;
-    }
+    // for(i=0; i< count; i++)
+    // {
+    //     var str = ""
+    //     var circleclass = i == 0 ? "activecircle" : "circle";
+    //     var dps = circles[i].dps.toString().replace(/^0+/, ''); 
+    //     //var closing = circles[i].downtime > 0 ? "WAITING " : "CLOSING! "; 
+    //     var phrases = ["SAFE: ", "CLOSE: "];
+    //     // var timestr = "";
+    //     // var time = circles[i].downtime > 0 ? circles[i].downtime : circles[i].uptime;
+    //     //var times = [circles[i].downtime, circles[i].uptime]
+    //     var times = [circles[i].add_downtime - circles[i].downtime, circles[i].add_uptime];
+    //     var displayTimes = [];
+    //     for(n=0;n<times.length;n++)
+    //     {
+    //         var timestr = "";
+    //         var time = times[n]
+    //         var displayTime = Math.floor(time / SECONDS);
+    //         var s = displayTime % 60; 
+    //         var m = (displayTime - s) / 60;
+    //         timestr = timestr + m.toString() + ":";
+    //         if(s < 10)
+    //         {
+    //             timestr = timestr + "0";
+    //         }
+    //         timestr = timestr + s.toString();
+    //         displayTimes.push(timestr);
+    //     }
+    //     str = str + "<div class="+circleclass+"><div class='dps'>"+dps+"</div><div class='dpsfooter'>DPS</div><div class='closetime'>";
+    //     str = str + "CIRCLE " + circles[i].idx + "<br>";
+    //     str = str + displayTimes[0]
+    //     // for(n=0; n<displayTimes.length; n++)
+    //     // {
+    //     //     str = str + phrases[n] + displayTimes[n]
+    //     //     if(n != displayTimes.length - 1)
+    //     //     {
+    //     //         str = str + "<br>";
+    //     //     }
+    //     // }
+    //     str = str +"</div>";
+    //     circlecont.innerHTML = circlecont.innerHTML + str;
+    // }
 
-    UpdateHealth();
+    // UpdateHealth();
 }
 
 function UpdateHealth()
 {
-    if(circles.length > 0)
-    {
-        var healthbarcont = document.getElementById('healthbarcontainer');
-        var circle = circles[0];
-        var lowestHP = Math.ceil(circle.dps*FIRST_AID_TIME);
-        var myclass = "veryhighhp"
+    // if(circles.length > 0)
+    // {
+    //     var healthbarcont = document.getElementById('healthbarcontainer');
+    //     var circle = circles[0];
+    //     var lowestHP = Math.ceil(circle.dps*FIRST_AID_TIME);
+    //     var myclass = "veryhighhp"
 
-        if(lowestHP <= 5)
-        {
-            myclass = "lowhp";
-        }
-        else if(lowestHP <= 20)
-        {
-            myclass = "lowishhp";
-        }
-        else if(lowestHP <= 50)
-        {
-            myclass = "medhp"
-        }
-        else if(lowestHP <= 75)
-        {
-            myclass="highhp";
-        }
+    //     if(lowestHP <= 5)
+    //     {
+    //         myclass = "lowhp";
+    //     }
+    //     else if(lowestHP <= 20)
+    //     {
+    //         myclass = "lowishhp";
+    //     }
+    //     else if(lowestHP <= 50)
+    //     {
+    //         myclass = "medhp"
+    //     }
+    //     else if(lowestHP <= 75)
+    //     {
+    //         myclass="highhp";
+    //     }
 
-        healthbarcont.innerHTML = "<progress id='healthbar' class='"+myclass+"' value='"+lowestHP.toString()+"' max='100'></progress><div id='healthtext'>LOWEST HEALTH TO USE FIRST AID</div>";
-    }
+    //     healthbarcont.innerHTML = "<progress id='healthbar' class='"+myclass+"' value='"+lowestHP.toString()+"' max='100'></progress><div id='healthtext'>LOWEST HEALTH TO USE FIRST AID</div>";
+    // }
 }
 
 var lastUpdateCircles = 0; 
@@ -885,69 +885,69 @@ var lastUpdateTimer = 0;
 
 function RunCircles()
 {
-    if(pathDone)
-    {
-        var circlecont = document.getElementById('circlecontainer');
+    // if(pathDone)
+    // {
+    //     var circlecont = document.getElementById('circlecontainer');
 
-        var dt = Date.now() - lastUpdateCircles;
-        lastUpdateCircles = Date.now();
+    //     var dt = Date.now() - lastUpdateCircles;
+    //     lastUpdateCircles = Date.now();
 
-        if(circles.length > 0)
-        {
-            var i = 0;
+    //     if(circles.length > 0)
+    //     {
+    //         var i = 0;
 
-            if(circles[i].downtime > 0)
-            {
-                circles[i].downtime -= dt; 
-            } else
-            {
-                circles[i].uptime -= dt; 
-            }
+    //         if(circles[i].downtime > 0)
+    //         {
+    //             circles[i].downtime -= dt; 
+    //         } else
+    //         {
+    //             circles[i].uptime -= dt; 
+    //         }
 
-            // var time = circles[i].downtime > 0 ? circles[i].downtime : circles[i].uptime;
-            // var displayTime = Math.floor(time / SECONDS)
-            // var closing = circles[i].downtime > 0 ? "WAIT " : "CLOSE ";
-            // var timestr = "";
-            // var s = displayTime % 60; 
-            // var m = (displayTime - s) / 60;
-            // if(m < 10)
-            // {
-            //     timestr = timestr + "0";
-            // }
-            // timestr = timestr + m.toString() + ":";
-            // if(s < 10)
-            // {
-            //     timestr = timestr + "0";
-            // }
-            // timestr = timestr + s.toString();
+    //         // var time = circles[i].downtime > 0 ? circles[i].downtime : circles[i].uptime;
+    //         // var displayTime = Math.floor(time / SECONDS)
+    //         // var closing = circles[i].downtime > 0 ? "WAIT " : "CLOSE ";
+    //         // var timestr = "";
+    //         // var s = displayTime % 60; 
+    //         // var m = (displayTime - s) / 60;
+    //         // if(m < 10)
+    //         // {
+    //         //     timestr = timestr + "0";
+    //         // }
+    //         // timestr = timestr + m.toString() + ":";
+    //         // if(s < 10)
+    //         // {
+    //         //     timestr = timestr + "0";
+    //         // }
+    //         // timestr = timestr + s.toString();
 
-            // var el = circlecont.firstChild;
-            // var close = el.getElementsByClassName('closetime')[0];
-            // close.innerHTML = closing + timestr;
+    //         // var el = circlecont.firstChild;
+    //         // var close = el.getElementsByClassName('closetime')[0];
+    //         // close.innerHTML = closing + timestr;
 
-            if(circles[i].uptime <= 0)
-            {
-                var a_time = 800;
-                circles.splice(0, 1);
-                var els = circlecont.getElementsByClassName('circle');
-                var animDate = Date.now();
+    //         if(circles[i].uptime <= 0)
+    //         {
+    //             var a_time = 800;
+    //             circles.splice(0, 1);
+    //             var els = circlecont.getElementsByClassName('circle');
+    //             var animDate = Date.now();
 
-                var canvas = document.getElementById('mainCanvas');
-                var ctx = canvas.getContext('2d');
+    //             var canvas = document.getElementById('mainCanvas');
+    //             var ctx = canvas.getContext('2d');
 
-                var height = ctx.canvas.height; 
+    //             var height = ctx.canvas.height; 
 
-                //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    //             //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-                var scaleFactor = height / STANDARD_SCALE;
+    //             var scaleFactor = height / STANDARD_SCALE;
 
-                setTimeout(function(){CircleAnim(els, a_time, animDate, 0, scaleFactor)}, 5);
-                setTimeout(function(){DisplayCircles();},a_time);
-            }
-        }
+    //             setTimeout(function(){CircleAnim(els, a_time, animDate, 0, scaleFactor)}, 5);
+    //             setTimeout(function(){DisplayCircles();},a_time);
+    //         }
+    //     }
 
-        setTimeout(function(){RunCircles();},1000);
-    }
+    //     setTimeout(function(){RunCircles();},1000);
+    // }
 }
 
 function CircleAnim(els, a_time, animDate, pos, scaleFactor)
@@ -995,8 +995,8 @@ function CalcDists(resizeDraw)
             var calculating = document.getElementById('calculating');
             calculating.style.display = "none"; 
 
-            var legend = document.getElementById('legend');
-            legend.style.display = "inline"; 
+            // var legend = document.getElementById('legend');
+            // legend.style.display = "inline"; 
 
             var clock = document.getElementById('gameclock');
             clock.innerHTML = "00:00";
@@ -1157,7 +1157,7 @@ function PostPathUpdate(resizeDraw = false)
     ctx.moveTo(newEnd1[0], newEnd1[1]);
     ctx.lineTo(newEnd2[0], newEnd2[1]);
 
-    ctx.strokeStyle = 'rgba(0, 0, 100, 0.17)';
+    ctx.strokeStyle = 'rgba(0, 0, 100, 0)';
     if(lw1 > CHUTE_DIST[1] * scaleFactor * 2)
     {
         lw1 = CHUTE_DIST[1] * scaleFactor * 2
@@ -1169,7 +1169,7 @@ function PostPathUpdate(resizeDraw = false)
     ctx.moveTo(newEnd1[0], newEnd1[1]);
     ctx.lineTo(newEnd2[0], newEnd2[1]);
 
-    ctx.strokeStyle = 'rgba(255, 200, 0, 0.2)';
+    ctx.strokeStyle = 'rgba(0, 0, 100, 0.3)';
     lw = lw_og;
     if(lw2 > CHUTE_DIST[0] * scaleFactor * 2)
     {
