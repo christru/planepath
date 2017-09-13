@@ -2,7 +2,7 @@
 var SECONDS = 1000;
 var STANDARD_SCALE = 600; //600px standard scale
 
-var CHUTE_DIST = [100, 165]; //early chute, late chute
+var CHUTE_DIST = [230, 165]; //early chute, late chute
 var CHUTE_1_COLOR = [255, 165, 0, 50];
 var CHUTE_2_COLOR = [15, 15, 200, 50];
 
@@ -995,8 +995,8 @@ function CalcDists(resizeDraw)
             var calculating = document.getElementById('calculating');
             calculating.style.display = "none"; 
 
-            // var legend = document.getElementById('legend');
-            // legend.style.display = "inline"; 
+            var legend = document.getElementById('legend');
+            legend.style.display = "inline"; 
 
             var clock = document.getElementById('gameclock');
             clock.innerHTML = "00:00";
